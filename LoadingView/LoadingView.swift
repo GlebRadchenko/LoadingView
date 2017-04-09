@@ -17,7 +17,7 @@ open class LoadStatusView: UIView {
     }
     
     /// progress value from 0 to 1
-    public var progress: Float = 0.0
+    public private(set) var progress: Float = 0.0
     
     @IBInspectable public var aspectRatio: Float = 5
     
