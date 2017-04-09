@@ -30,10 +30,33 @@
                                     <constraint firstAttribute="height" constant="200" id="9he-hH-4d8"/>
                                     <constraint firstAttribute="width" secondItem="GWd-pv-OCy" secondAttribute="height" multiplier="1:1" id="cl6-HS-14g"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="frontColor">
+                                        <color key="value" red="0.30930793290000003" green="0.61127424239999995" blue="0.83534926180000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backColor">
+                                        <color key="value" red="0.2221408420138889" green="0.83083767361111116" blue="0.84841579861111116" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="aspectRatio">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1nf-kh-8M4">
+                                <rect key="frame" x="152.5" y="283" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="C4W-Dn-ftc"/>
+                                </constraints>
+                                <state key="normal" title="Load"/>
+                                <connections>
+                                    <action selector="load" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Sq-Cy-xwP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="1nf-kh-8M4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4gS-QF-HWd"/>
+                            <constraint firstItem="1nf-kh-8M4" firstAttribute="top" secondItem="GWd-pv-OCy" secondAttribute="bottom" constant="16" id="Amc-7P-IDN"/>
                             <constraint firstItem="GWd-pv-OCy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gQL-2B-Y7U"/>
                             <constraint firstItem="GWd-pv-OCy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1/2" id="vvx-fR-K7o"/>
                         </constraints>

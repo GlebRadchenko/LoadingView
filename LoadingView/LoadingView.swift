@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoadStatusView: UIView {
+open class LoadStatusView: UIView {
     
     enum State {
         case inProgress
@@ -17,17 +17,17 @@ class LoadStatusView: UIView {
     }
     
     /// progress value from 0 to 1
-    @IBInspectable var progress: Float = 0.0
+    public var progress: Float = 0.0
     
-    @IBInspectable var aspectRatio: Float = 5
+    @IBInspectable public var aspectRatio: Float = 5
     
-    @IBInspectable var frontColor: UIColor = UIColor(red: 186 / 255, green: 2 / 255, blue: 0, alpha: 1.0)
+    @IBInspectable public var frontColor: UIColor = UIColor(red: 186 / 255, green: 2 / 255, blue: 0, alpha: 1.0)
     
-    @IBInspectable var backColor: UIColor = UIColor(red: 254 / 255, green: 92 / 255, blue: 92 / 255, alpha: 1.0)
+    @IBInspectable public var backColor: UIColor = UIColor(red: 254 / 255, green: 92 / 255, blue: 92 / 255, alpha: 1.0)
     
-    @IBInspectable var completionColor = UIColor(red: 85 / 255, green: 212 / 255, blue: 86 / 255, alpha: 1.0)
+    @IBInspectable public var completionColor = UIColor(red: 85 / 255, green: 212 / 255, blue: 86 / 255, alpha: 1.0)
     
-    @IBInspectable var fullAnimationDuration = 1.0
+    @IBInspectable public var fullAnimationDuration = 1.0
     
     lazy var contentLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
@@ -66,7 +66,7 @@ class LoadStatusView: UIView {
     var state: State = .start
     var animationQueue: [() -> Void] = []
     
-    override func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         set(progress: 0)
     }
@@ -81,6 +81,9 @@ class LoadStatusView: UIView {
         
         loadingLayer.add(animForLoading(from: oldProgress),
                          forKey: nil)
+        
+        if oldState == state { return }
+        
         contentLayer.add(animForContentLayer(for: oldState),
                          forKey: nil)
     }
@@ -161,7 +164,6 @@ class LoadStatusView: UIView {
     
     func animForContentLayer(for oldState: State) -> CAAnimationGroup {
         let group = CAAnimationGroup()
-        
         let shapeAnim = CABasicAnimation(keyPath: "path")
         shapeAnim.fromValue = contentShape(for: oldState).cgPath
         shapeAnim.toValue = contentShape(for: state).cgPath
@@ -181,7 +183,7 @@ class LoadStatusView: UIView {
 }
 
 extension LoadStatusView: CAAnimationDelegate {
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+    public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if flag {
             if !animationQueue.isEmpty {
                 animationQueue.removeFirst()()

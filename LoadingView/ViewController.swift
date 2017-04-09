@@ -24,15 +24,21 @@ class ViewController: UIViewController {
     }
     
     func updateProgress() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.progress += 0.25
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.progress += 0.1
             self.progress = truncf(self.progress * 10) / 10
             if self.progress > 1 {
                 self.progress = 0
+                return
             }
             self.loadingView.set(progress: self.progress)
             self.updateProgress()
         }
+    }
+    
+    @IBAction func load() {
+        self.progress = 0
+        updateProgress()
     }
 }
 
