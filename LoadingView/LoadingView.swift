@@ -19,7 +19,9 @@ open class LoadStatusView: UIView {
     /// progress value from 0 to 1
     public private(set) var progress: Float = 0.0
     
-    @IBInspectable public var aspectRatio: Float = 5
+    public var aspectRatio: Float {
+        return Float(bounds.width / bounds.height)
+    }
     
     @IBInspectable public var frontColor: UIColor = UIColor(red: 186 / 255, green: 2 / 255, blue: 0, alpha: 1.0)
     
@@ -72,7 +74,7 @@ open class LoadStatusView: UIView {
     }
     
     func set(progress: Float) {
-        let progress = truncf(progress * 10) / 10
+        let progress = truncf(progress * 100) / 100
         let oldProgress = self.progress
         let oldState = self.state
         
@@ -80,12 +82,12 @@ open class LoadStatusView: UIView {
         self.state = state(for: self.progress)
         
         loadingLayer.add(animForLoading(from: oldProgress),
-                         forKey: nil)
+                         forKey: "loading")
         
         if oldState == state { return }
         
         contentLayer.add(animForContentLayer(for: oldState),
-                         forKey: nil)
+                         forKey: "content")
     }
     
     func state(for progress: Float) -> State {
@@ -100,7 +102,7 @@ open class LoadStatusView: UIView {
     
     func contentShape(for state: State) -> UIBezierPath {
         var width: CGFloat = 0
-        let height: CGFloat = bounds.width / CGFloat(aspectRatio)
+        let height: CGFloat = bounds.height
         
         switch state {
         case .start, .end:
@@ -123,7 +125,7 @@ open class LoadStatusView: UIView {
             width = bounds.width / CGFloat(aspectRatio)
         }
         
-        let height = bounds.height / CGFloat(aspectRatio)
+        let height = bounds.height
         
         return UIBezierPath(roundedRect: CGRect(x: bounds.midX - width / 2,
                                                 y: bounds.midY - height / 2,
